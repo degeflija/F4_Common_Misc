@@ -17,7 +17,7 @@
 //  KANONISCHE KOPIE -- LINT-Runde 2, Nachtrag
 //
 //  Es gab vier physische Timer_Lib.c im Baum: diese hier plus je eine
-//  lokale in AD57_FE_GIT, F4_GenBL_GIT und F4_P_Util_GIT. Alle vier
+//  lokale in AD57_FE_GIT, F4_GenBL_GIT und F4_Audio_GIT. Alle vier
 //  Projekte kompilieren aber ohnehin schon den Linked Folder Common_Misc
 //  mit -- die drei lokalen Kopien waren also Duplikate.
 //
@@ -30,7 +30,7 @@
 //  Zeitbasis von g_SystemTime_sec auf g_SystemTime_ms umgestellt. Einziger
 //  Verbraucher ist CAN_MDP_Lib.c im AD57_BL, das damit einen CAN-
 //  Paketaustausch misst -- der dauert Millisekunden, mit Sekunden kam
-//  praktisch immer 0 heraus. Die lokalen Kopien in GenBL und P_Util
+//  praktisch immer 0 heraus. Die lokalen Kopien in GenBL und Audio
 //  benutzten bereits ms. Die Arrays werden ausserhalb dieser Datei nirgends
 //  gelesen (reine Debugger-Stoppuhr), die Umstellung aendert also kein
 //  Laufzeitverhalten.
