@@ -14,26 +14,25 @@
 //
 //  ###########################################################################
 //
-//  KANONISCHE KOPIE -- LINT-Runde 2, Nachtrag
+//  CANONICAL COPY -- LINT round 2, addendum
 //
-//  Es gab vier physische Timer_Lib.c im Baum: diese hier plus je eine
-//  lokale in AD57_FE_GIT, F4_GenBL_GIT und F4_Audio_GIT. Alle vier
-//  Projekte kompilieren aber ohnehin schon den Linked Folder Common_Misc
-//  mit -- die drei lokalen Kopien waren also Duplikate.
+//  There were four physical Timer_Lib.c files in the tree: this one plus a
+//  local one each in AD57_FE_GIT, F4_GenBL_GIT and F4_Audio_GIT. But all
+//  four projects already compile the linked folder Common_Misc as well --
+//  so the three local copies were duplicates.
 //
-//  Aufgefallen ist es nie, weil MDP_TIMER_LIB nur im AD57_BL gesetzt ist.
-//  In den anderen drei Projekten uebersetzen beide Kopien zu einer leeren
-//  Uebersetzungseinheit, es kollidiert also nichts. Sobald MDP_TIMER_LIB
-//  dort eingeschaltet wird (im GenBL steht die Zeile auskommentiert bereit),
-//  gibt es "multiple definition of Timer_Set" beim Linken.
+//  Nobody noticed, because MDP_TIMER_LIB is set only in AD57_BL.
+//  In the other three projects both copies compile to an empty
+//  translation unit, so nothing collides. As soon as MDP_TIMER_LIB is
+//  switched on there (in GenBL the line is ready, commented out), the
+//  linker reports "multiple definition of Timer_Set".
 //
-//  Zeitbasis von g_SystemTime_sec auf g_SystemTime_ms umgestellt. Einziger
-//  Verbraucher ist CAN_MDP_Lib.c im AD57_BL, das damit einen CAN-
-//  Paketaustausch misst -- der dauert Millisekunden, mit Sekunden kam
-//  praktisch immer 0 heraus. Die lokalen Kopien in GenBL und Audio
-//  benutzten bereits ms. Die Arrays werden ausserhalb dieser Datei nirgends
-//  gelesen (reine Debugger-Stoppuhr), die Umstellung aendert also kein
-//  Laufzeitverhalten.
+//  Time base changed from g_SystemTime_sec to g_SystemTime_ms. The only
+//  user is CAN_MDP_Lib.c in AD57_BL, which uses it to time a CAN packet
+//  exchange -- that takes milliseconds, so with seconds the result was
+//  nearly always 0. The local copies in GenBL and Audio already used ms.
+//  The arrays are not read anywhere outside this file (pure debugger
+//  stopwatch), so the change does not alter any run-time behavior.
 //
 //  ###########################################################################
 
@@ -47,13 +46,13 @@
   void  Timer_Set ( uint8_t index )
   {
     //
-    //  LINT-Fix 2 : die Pruefung war doppelt falsch --
-    //    - "index >= 0" ist bei uint8_t immer wahr und prueft nichts
-    //    - "<= c_length_timer_array" liess index == 10 durch, gueltig
-    //      sind aber nur 0..9. Der Schreibzugriff landete dann im
-    //      COMMON-Block hinter dem Array.
-    //  Seit ASSERT nicht mehr hart stoppt (Fix A3) braucht es hier eine
-    //  echte Schranke, nicht nur eine Diagnosehilfe.
+    //  LINT-Fix 2 : the check was wrong in two ways --
+    //    - "index >= 0" is always true for uint8_t and checks nothing
+    //    - "<= c_length_timer_array" let index == 10 pass, but only
+    //      0..9 are valid. The write then landed in the COMMON block
+    //      behind the array.
+    //  Since ASSERT no longer stops hard (Fix A3), this needs a real
+    //  barrier here, not just a diagnostic aid.
     //
     ASSERT ( index < c_length_timer_array );
     if ( index >= c_length_timer_array )
@@ -69,13 +68,13 @@
   void Timer_Get_Current_Value ( uint8_t index )
   {
     //
-    //  LINT-Fix 2 : die Pruefung war doppelt falsch --
-    //    - "index >= 0" ist bei uint8_t immer wahr und prueft nichts
-    //    - "<= c_length_timer_array" liess index == 10 durch, gueltig
-    //      sind aber nur 0..9. Der Schreibzugriff landete dann im
-    //      COMMON-Block hinter dem Array.
-    //  Seit ASSERT nicht mehr hart stoppt (Fix A3) braucht es hier eine
-    //  echte Schranke, nicht nur eine Diagnosehilfe.
+    //  LINT-Fix 2 : the check was wrong in two ways --
+    //    - "index >= 0" is always true for uint8_t and checks nothing
+    //    - "<= c_length_timer_array" let index == 10 pass, but only
+    //      0..9 are valid. The write then landed in the COMMON block
+    //      behind the array.
+    //  Since ASSERT no longer stops hard (Fix A3), this needs a real
+    //  barrier here, not just a diagnostic aid.
     //
     ASSERT ( index < c_length_timer_array );
     if ( index >= c_length_timer_array )

@@ -37,10 +37,10 @@ static COMMON QueueHandle_t I2C2_CPL_Message_Id = NULL;
 /**
  * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
  *
- * Die beiden folgenden Routinen stehen so woertlich auch in  main.cpp
+ * The two routines below also appear word for word in  main.cpp
  *
- * Sie erscheinen hier deshalb noch einmal, weil sie in den beiden
- * ...StuckResolve... Routinen gebraucht werden.
+ * They are repeated here because the two ...StuckResolve...
+ * routines need them.
  */
 /**
  * *****************************************************************************
