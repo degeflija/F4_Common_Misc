@@ -9,7 +9,7 @@
   * @file     I2C.h
   * @brief    New Vario
   * @author   Max Baetz / Horst Rupp
-  * @brief    This routine TODO
+  * @brief
   * ############################################################################
   */
 //

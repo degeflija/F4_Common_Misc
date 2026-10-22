@@ -3,7 +3,7 @@
   * @file     ADC_Lib.c
   * @brief    New Vario
   * @author   Horst Rupp
-  * @brief    This routine TODO
+  * @brief
   * ############################################################################
   */
 //
